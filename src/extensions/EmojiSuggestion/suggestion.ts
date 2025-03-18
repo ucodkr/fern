@@ -1,10 +1,10 @@
 import { ReactRenderer } from '@tiptap/react'
 import { Editor } from '@tiptap/core'
 import { SuggestionKeyDownProps, SuggestionProps } from '@tiptap/suggestion'
-import tippy, { Instance } from 'tippy.js'
+import tippy, { } from 'tippy.js'
 
 import EmojiList from './components/EmojiList'
-import { KeyboardEvent, RefAttributes } from 'react'
+import { RefAttributes } from 'react'
 import { EmojiListProps } from './types'
 
 export const emojiSuggestion = {
@@ -44,7 +44,7 @@ export const emojiSuggestion = {
         })
       },
 
-      onUpdate(props: SuggestionProps<any>) {
+      onUpdate (props: SuggestionProps<any>) {
         component.updateProps(props)
 
         popup[0].setProps({
@@ -52,7 +52,7 @@ export const emojiSuggestion = {
         })
       },
 
-      onKeyDown(props: SuggestionKeyDownProps) {
+      onKeyDown (props: SuggestionKeyDownProps) {
         if (props.event.key === 'Escape') {
           popup[0].hide()
           component.destroy()
@@ -63,7 +63,7 @@ export const emojiSuggestion = {
         return component.ref?.onKeyDown(props) ?? false
       },
 
-      onExit() {
+      onExit () {
         popup[0].destroy()
         component.destroy()
       },

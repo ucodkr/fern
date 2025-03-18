@@ -1,5 +1,5 @@
 import { EditorContent } from '@tiptap/react'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 import { LinkMenu } from '@/components/menus'
 
@@ -18,7 +18,6 @@ import { useSidebar } from '@/hooks/useSidebar'
 import { TiptapCollabProvider } from '@hocuspocus/provider'
 
 export const BlockEditor = ({
-  aiToken,
   provider,
 }: {
   aiToken?: string
@@ -28,7 +27,7 @@ export const BlockEditor = ({
   const menuContainerRef = useRef(null)
 
   const leftSidebar = useSidebar()
-  const { editor, users, collabState } = useBlockEditor({ aiToken, provider })
+  const { editor, users, collabState } = useBlockEditor({ provider })
 
   if (!editor || !users) {
     return null

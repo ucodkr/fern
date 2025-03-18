@@ -6,22 +6,22 @@ import { EditorView } from '@tiptap/pm/view'
 export const Link = TiptapLink.extend({
   inclusive: false,
 
-  parseHTML() {
+  parseHTML () {
     return [{ tag: 'a[href]:not([data-type="button"]):not([href *= "javascript:" i])' }]
   },
 
-  renderHTML({ HTMLAttributes }) {
+  renderHTML ({ HTMLAttributes }) {
     return ['a', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, { class: 'link' }), 0]
   },
 
-  addProseMirrorPlugins() {
+  addProseMirrorPlugins () {
     const { editor } = this
 
     return [
       ...(this.parent?.() || []),
       new Plugin({
         props: {
-          handleKeyDown: (view: EditorView, event: KeyboardEvent) => {
+          handleKeyDown: (_view: EditorView, event: KeyboardEvent) => {
             const { selection } = editor.state
 
             if (event.key === 'Escape' && selection.empty !== true) {

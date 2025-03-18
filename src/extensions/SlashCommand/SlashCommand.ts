@@ -16,7 +16,7 @@ export const SlashCommand = Extension.create({
 
   priority: 200,
 
-  onCreate() {
+  onCreate () {
     popup = tippy('body', {
       interactive: true,
       trigger: 'manual',
@@ -36,7 +36,7 @@ export const SlashCommand = Extension.create({
     })
   },
 
-  addProseMirrorPlugins() {
+  addProseMirrorPlugins () {
     return [
       Suggestion({
         editor: this.editor,
@@ -126,7 +126,7 @@ export const SlashCommand = Extension.create({
 
               const { view } = props.editor
 
-              const editorNode = view.dom as HTMLElement
+
 
               const getReferenceClientRect = () => {
                 if (!props.clientRect) {
@@ -166,12 +166,11 @@ export const SlashCommand = Extension.create({
               popup?.[0].show()
             },
 
-            onUpdate(props: SuggestionProps) {
+            onUpdate (props: SuggestionProps) {
               component.updateProps(props)
 
               const { view } = props.editor
 
-              const editorNode = view.dom as HTMLElement
 
               const getReferenceClientRect = () => {
                 if (!props.clientRect) {
@@ -206,19 +205,19 @@ export const SlashCommand = Extension.create({
               props.editor.storage[extensionName].rect = props.clientRect
                 ? getReferenceClientRect()
                 : {
-                    width: 0,
-                    height: 0,
-                    left: 0,
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                  }
+                  width: 0,
+                  height: 0,
+                  left: 0,
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                }
               popup?.[0].setProps({
                 getReferenceClientRect,
               })
             },
 
-            onKeyDown(props: SuggestionKeyDownProps) {
+            onKeyDown (props: SuggestionKeyDownProps) {
               if (props.event.key === 'Escape') {
                 popup?.[0].hide()
 
@@ -232,7 +231,7 @@ export const SlashCommand = Extension.create({
               return component.ref?.onKeyDown(props)
             },
 
-            onExit(props) {
+            onExit (props) {
               popup?.[0].hide()
               if (scrollHandler) {
                 const { view } = props.editor
@@ -246,7 +245,7 @@ export const SlashCommand = Extension.create({
     ]
   },
 
-  addStorage() {
+  addStorage () {
     return {
       rect: {
         width: 0,

@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useEditor, useEditorState } from '@tiptap/react'
 import type { AnyExtension, Editor } from '@tiptap/core'
-import Collaboration from '@tiptap/extension-collaboration'
+
 import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
 import { TiptapCollabProvider, WebSocketStatus } from '@hocuspocus/provider'
-import type { Doc as YDoc } from 'yjs'
 
 import { ExtensionKit } from '@/extensions/extension-kit'
 import { userColors, userNames } from '../lib/constants'
 import { randomElement } from '../lib/utils'
 import type { EditorUser } from '../components/BlockEditor/types'
 import { initialContent } from '@/lib/data/initialContent'
-import { Ai } from '@/extensions/Ai'
-import { AiImage, AiWriter } from '@/extensions'
+
 
 declare global {
   interface Window {
@@ -21,14 +19,10 @@ declare global {
 }
 
 export const useBlockEditor = ({
-  aiToken,
-  ydoc,
+
   provider,
-  userId,
-  userName = 'Maxi',
 }: {
-  aiToken?: string
-  ydoc: YDoc
+
   provider?: TiptapCollabProvider | null | undefined
   userId?: string
   userName?: string
@@ -60,33 +54,17 @@ export const useBlockEditor = ({
         ...ExtensionKit({
           provider,
         }),
-        provider
-          ? Collaboration.configure({
-              document: ydoc,
-            })
-          : undefined,
+
         provider
           ? CollaborationCursor.configure({
-              provider,
-              user: {
-                name: randomElement(userNames),
-                color: randomElement(userColors),
-              },
-            })
+            provider,
+            user: {
+              name: randomElement(userNames),
+              color: randomElement(userColors),
+            },
+          })
           : undefined,
-        aiToken
-          ? AiWriter.configure({
-              authorId: userId,
-              authorName: userName,
-            })
-          : undefined,
-        aiToken
-          ? AiImage.configure({
-              authorId: userId,
-              authorName: userName,
-            })
-          : undefined,
-        aiToken ? Ai.configure({ token: aiToken }) : undefined,
+
       ].filter((e): e is AnyExtension => e !== undefined),
       editorProps: {
         attributes: {
@@ -97,7 +75,7 @@ export const useBlockEditor = ({
         },
       },
     },
-    [ydoc, provider],
+    [provider],
   )
   const users = useEditorState({
     editor,

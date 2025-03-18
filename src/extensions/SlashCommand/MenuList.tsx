@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Command, MenuListProps } from './types'
-import { CommandButton } from './CommandButton'
+
 import { Surface } from '@/components/ui/Surface'
 import { DropdownButton } from '@/components/ui/Dropdown'
 import { Icon } from '@/components/ui/Icon'
