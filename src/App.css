@@ -1,0 +1,23 @@
+html,
+body,
+#root,
+.app,
+.content {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+
+}
+
+.debug-border {
+  border: 0.1px;
+  border-style: dashed;
+  border-color: rgb(168, 168, 168);
+}
+
+
+
