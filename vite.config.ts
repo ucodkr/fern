@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       lib: {
-        entry: 'src/index.ts', // 라이브러리 진입점
+        entry: 'src/components/BlockEditor/index.tsx', // 라이브러리 진입점
         name: 'fern', // 라이브러리 이름
         formats: ['es', 'cjs'],
         fileName: (format) => `fern.${format}.js`

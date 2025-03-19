@@ -1,4 +1,4 @@
-.ProseMirror {
+.ucodkr-fern  .ProseMirror {
   /* Placeholder Styles */
   .is-empty::before {
     @apply text-black/40 dark:text-white/40 float-left h-0 pointer-events-none w-full;

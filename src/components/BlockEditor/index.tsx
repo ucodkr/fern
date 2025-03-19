@@ -1,1 +1,2 @@
-export * from './BlockEditor'
+import BlockEditor from './BlockEditor'
+export { BlockEditor }

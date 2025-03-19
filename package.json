@@ -1,9 +1,23 @@
 {
-  "name": "crudoc",
+  "name": "@ucodkr/fern",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
+  "main": "dist/fern.cjs.js",
+  "module": "dist/fern.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/fern.es.js",
+      "require": "./dist/fern.cjscjs"
+    },
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
   "scripts": {
     "// 클라우드플래서 배포 초기화": "public/404.html 이 존재하면 html5 모드로 동작한다.",
     "//init-deploy": "npx wrangler pages project create",
@@ -15,7 +29,8 @@
     "build": "tsc && vite build",
     "build-w": "tsc && vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "link": "yarn link"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.13.5",
@@ -136,5 +151,15 @@
     "tailwindcss": "^3.4.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
-  }
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucodkr/fern.git"
+  },
+  "author": "jhkim@ucod.kr",
+  "bugs": {
+    "url": "https://github.com/ucodkr/fern/issues"
+  },
+  "homepage": "https://github.com/ucodkr/fern#readme"
 }

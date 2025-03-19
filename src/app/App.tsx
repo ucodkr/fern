@@ -6,7 +6,7 @@ import './preflight.css'
 
 function App () {
 
-  return <BlockEditor hasCollab={false} ></BlockEditor>
+  return <BlockEditor className='border rounded-sm'></BlockEditor>
 }
 
 export default App

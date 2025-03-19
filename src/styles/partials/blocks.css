@@ -1,4 +1,4 @@
-.ProseMirror {
+.ucodkr-fern .ProseMirror {
   /* Image Block */
   figure[data-type='imageBlock'] {
     @apply m-0;

@@ -1,58 +1,68 @@
-import { EditorContent } from '@tiptap/react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AnyExtension, EditorContent, useEditor } from '@tiptap/react'
 import { useRef } from 'react'
 
 import { LinkMenu } from '@/components/menus'
 
-import { useBlockEditor } from '@/hooks/useBlockEditor'
-
 import '@/styles/index.css'
 
-import { Sidebar } from '@/components/Sidebar'
 import ImageBlockMenu from '@/extensions/ImageBlock/components/ImageBlockMenu'
 import { ColumnsMenu } from '@/extensions/MultiColumn/menus'
 import { TableColumnMenu, TableRowMenu } from '@/extensions/Table/menus'
-import { EditorHeader } from './components/EditorHeader'
 import { TextMenu } from '../menus/TextMenu'
 import { ContentItemMenu } from '../menus/ContentItemMenu'
-import { useSidebar } from '@/hooks/useSidebar'
-import { TiptapCollabProvider } from '@hocuspocus/provider'
 
+import { ExtensionKit } from '@/extensions/extension-kit'
+import { cn } from '@/lib/utils'
 export const BlockEditor = ({
-  provider,
+  initialContent,
+  className
 }: {
-  aiToken?: string
-  hasCollab: boolean
-  provider?: TiptapCollabProvider | null | undefined
+  initialContent?: any
+  className?: string
 }) => {
   const menuContainerRef = useRef(null)
 
-  const leftSidebar = useSidebar()
-  const { editor, users, collabState } = useBlockEditor({ provider })
+  const editor = useEditor(
+    {
+      immediatelyRender: true,
+      shouldRerenderOnTransaction: false,
+      autofocus: true,
+      onCreate: ctx => {
+        if (ctx.editor.isEmpty) {
+          ctx.editor.commands.setContent(initialContent)
+          ctx.editor.commands.focus('start', { scrollIntoView: true })
+        }
+      },
+      extensions: [
+        ...ExtensionKit({}),
 
-  if (!editor || !users) {
-    return null
-  }
+
+      ].filter((e): e is AnyExtension => e !== undefined),
+      editorProps: {
+        attributes: {
+          autocomplete: 'off',
+          autocorrect: 'off',
+          autocapitalize: 'off',
+          class: 'min-h-full',
+        },
+      },
+    },
+    [],
+  )
 
   return (
-    <div className="flex h-full" ref={menuContainerRef}>
-      <Sidebar isOpen={leftSidebar.isOpen} onClose={leftSidebar.close} editor={editor} />
-      <div className="relative flex flex-col flex-1 h-full overflow-hidden">
-        <EditorHeader
-          editor={editor}
-          collabState={collabState}
-          users={users}
-          isSidebarOpen={leftSidebar.isOpen}
-          toggleSidebar={leftSidebar.toggle}
-        />
-        <EditorContent editor={editor} className="flex-1 overflow-y-auto" />
-        <ContentItemMenu editor={editor} />
-        <LinkMenu editor={editor} appendTo={menuContainerRef} />
-        <TextMenu editor={editor} />
-        <ColumnsMenu editor={editor} appendTo={menuContainerRef} />
-        <TableRowMenu editor={editor} appendTo={menuContainerRef} />
-        <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
-        <ImageBlockMenu editor={editor} appendTo={menuContainerRef} />
-      </div>
+
+    <div className={cn("ucodkr-fern border border-cyan-600 relative flex flex-col flex-1 h-full overflow-hidden", className)} ref={menuContainerRef}>
+
+      <EditorContent editor={editor} className="border flex-1 overflow-y-auto" />
+      <ContentItemMenu editor={editor} />
+      <LinkMenu editor={editor} appendTo={menuContainerRef} />
+      <TextMenu editor={editor} />
+      <ColumnsMenu editor={editor} appendTo={menuContainerRef} />
+      <TableRowMenu editor={editor} appendTo={menuContainerRef} />
+      <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
+      <ImageBlockMenu editor={editor} appendTo={menuContainerRef} />
     </div>
   )
 }
