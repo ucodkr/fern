@@ -24,10 +24,10 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       lib: {
-        entry: 'src/components/BlockEditor/index.tsx', // 라이브러리 진입점
-        name: 'MyComponents', // 라이브러리 이름
+        entry: 'src/index.ts', // 라이브러리 진입점
+        name: 'fern', // 라이브러리 이름
         formats: ['es', 'cjs'],
-        fileName: (format) => `my-components.${format}.js`
+        fileName: (format) => `fern.${format}.js`
       },
       rollupOptions: {
         external: ['react', 'react-dom'], // React는 외부 의존성으로 처리
@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [
-      dts(),
+      dts({ exclude: "app/**" }),
       {
         name: 'custom-index-html',
         transformIndexHtml (html) {
