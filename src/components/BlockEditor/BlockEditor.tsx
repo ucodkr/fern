@@ -14,6 +14,8 @@ import { ContentItemMenu } from '../menus/ContentItemMenu'
 
 import { ExtensionKit } from '@/extensions/extension-kit'
 import { cn } from '@/lib/utils'
+import CustomBlock from '@/custom/CustomBlock'
+import InlineInput from '@/custom/InlineInput'
 export const BlockEditor = ({
   initialContent,
   className
@@ -36,6 +38,8 @@ export const BlockEditor = ({
       },
       extensions: [
         ...ExtensionKit({}),
+        CustomBlock,
+        InlineInput,
 
 
       ].filter((e): e is AnyExtension => e !== undefined),
@@ -54,6 +58,16 @@ export const BlockEditor = ({
   return (
 
     <div className={cn("ucodkr-fern border border-cyan-600 relative flex flex-col flex-1 h-full overflow-hidden", className)} ref={menuContainerRef}>
+      <button onClick={() => editor.commands.insertCustomBlock()}>
+        블록 추가
+      </button>
+
+      <button onClick={() => {
+        console.log("input...")
+        editor.commands.insertInlineInput()
+      }}>
+        인라인 입력 추가
+      </button>
 
       <EditorContent editor={editor} className="border flex-1 overflow-y-auto" />
       <ContentItemMenu editor={editor} />
