@@ -7,10 +7,12 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+
   ],
+  safelist: ['ProseMirror'],
   prefix: "",
   corePlugins: {
-    preflight: false,
+    // preflight: false,
   },
   theme: {
     container: {
