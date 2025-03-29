@@ -40,7 +40,7 @@ const CustomBlock = Node.create({
   renderHTML ({ HTMLAttributes }) {
     return ["div", mergeAttributes(HTMLAttributes, {
       "data-type": "customBlock",
-      class: "border p-2 flex"
+      class: "border rounded-lg  flex"
     }), 0];
   },
   // addNodeView () {

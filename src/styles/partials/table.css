@@ -1,6 +1,6 @@
 .ucodkr-fern  .ProseMirror {
   .tableWrapper {
-    @apply my-12;
+    @apply my-2;
   }
 
   table {
