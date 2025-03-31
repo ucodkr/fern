@@ -2,7 +2,7 @@ import { mergeAttributes } from '@tiptap/core'
 import { Figure } from '../Figure'
 import { Question } from './Question'
 import { Answer } from './Answer'
-
+import './question.css';
 declare module '@tiptap/core' {
   // eslint-disable-next-line no-unused-vars
   interface Commands<ReturnType> {
@@ -61,7 +61,6 @@ export const QuestionFigure = Figure.extend({
                         type: 'paragraph',
                         attrs: {
                           textAlign: 'left',
-                          class: "p-2 border "
                         },
                       },
                     ],
@@ -69,6 +68,10 @@ export const QuestionFigure = Figure.extend({
 
                   {
                     type: 'answer',
+                    attrs: {
+                      textAlign: 'left',
+                      text: "input"
+                    },
                   },
 
                 ],

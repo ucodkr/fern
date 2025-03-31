@@ -1,7 +1,8 @@
-import { Node } from '@tiptap/core'
+import { mergeAttributes, Node } from '@tiptap/core'
 
+const NAME = "question"
 export const Question = Node.create({
-  name: 'question',
+  name: NAME,
 
   content: 'paragraph+',
 
@@ -12,13 +13,13 @@ export const Question = Node.create({
   parseHTML () {
     return [
       {
-        tag: 'qestion',
+        tag: `div[data-type='${NAME}']`
       },
     ]
   },
 
   renderHTML ({ HTMLAttributes }) {
-    return ['question', HTMLAttributes, 0]
+    return [NAME, mergeAttributes(HTMLAttributes, { class: "border1", "data-type": NAME }), 0]
   },
 
   addKeyboardShortcuts () {
