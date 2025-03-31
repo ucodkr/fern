@@ -16,12 +16,17 @@ import { ExtensionKit } from '@/extensions/extension-kit'
 import { cn } from '@/lib/utils'
 import CustomBlock from '@/custom/CustomBlock'
 import InlineInput from '@/custom/InlineInput'
+import { QuestionFigure } from '@/extensions/QuestionFigure'
+import { Question } from '@/extensions/QuestionFigure/Question'
+import { Answer } from '@/extensions/QuestionFigure/Answer'
 export const BlockEditor = ({
   initialContent,
-  className
+  className,
+  onChange
 }: {
   initialContent?: any
-  className?: string
+  className?: string,
+  onChange?: (editor: any) => void
 }) => {
   const menuContainerRef = useRef(null)
 
@@ -36,10 +41,14 @@ export const BlockEditor = ({
           ctx.editor.commands.focus('start', { scrollIntoView: true })
         }
       },
+      onUpdate: ({ editor }) => {
+        onChange && onChange(editor);
+      },
       extensions: [
         ...ExtensionKit({}),
         CustomBlock,
         InlineInput,
+        QuestionFigure,
 
 
       ].filter((e): e is AnyExtension => e !== undefined),
@@ -60,6 +69,8 @@ export const BlockEditor = ({
     <div className={cn("ucodkr-fern border border-cyan-600 relative flex flex-col flex-1 h-full overflow-hidden", className)} ref={menuContainerRef}>
       <button onClick={() => editor.commands.insertCustomBlock()}>
         블록 추가
+      </button><button onClick={() => editor.commands.setQuestion()}>
+        질물 추가
       </button>
 
       <button onClick={() => {
